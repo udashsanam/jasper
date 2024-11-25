@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="users" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c84ab739-c029-43e7-adfc-5add6db4c381">
+    <queryString>
+        <![CDATA[]]>
+    </queryString>
+    <field name="id" class="java.lang.Integer"/>
+    <field name="username" class="java.lang.String"/>
+    <field name="password" class="java.lang.String"/>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <title>
+        <band height="79" splitType="Stretch">
+            <staticText>
+                <reportElement x="140" y="18" width="214" height="30" uuid="cb67ed20-f12f-46ee-a39f-6ddd1605a72b"/>
+                <text><![CDATA[UserAccountDetails]]></text>
+            </staticText>
+        </band>
+    </title>
+    <pageHeader>
+        <band height="35" splitType="Stretch"/>
+    </pageHeader>
+    <columnHeader>
+        <band height="35" splitType="Stretch">
+            <staticText>
+                <reportElement x="1" y="0" width="100" height="30" uuid="888c7bdb-c653-413f-9463-1ca885931d76"/>
+                <text><![CDATA[id]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="100" y="0" width="240" height="30" uuid="1177c9db-6177-46c7-9888-365067151242"/>
+                <text><![CDATA[Username]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="339" y="1" width="209" height="30" uuid="b146339a-7da0-48e4-b087-c3a07cb4acbb"/>
+                <text><![CDATA[password]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="35" splitType="Stretch">
+            <property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+            <property name="com.jaspersoft.studio.unit.height" value="px"/>
+            <textField>
+                <reportElement x="4" y="1" width="98" height="30" uuid="a2f51f4c-778d-4c00-bd91-840f32af7a81"/>
+                <textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="101" y="0" width="239" height="30" uuid="44a969f4-86a7-42ec-bf2e-9cca570b18a7">
+                    <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+                </reportElement>
+                <textFieldExpression><![CDATA[$F{username}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="339" y="1" width="209" height="30" uuid="65ee3411-9a6e-401d-97e2-3c63cfe80763"/>
+                <textFieldExpression><![CDATA[$F{password}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+    <columnFooter>
+        <band height="45" splitType="Stretch"/>
+    </columnFooter>
+    <pageFooter>
+        <band height="54" splitType="Stretch"/>
+    </pageFooter>
+    <summary>
+        <band height="42" splitType="Stretch"/>
+    </summary>
+</jasperReport>
