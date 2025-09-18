@@ -3,6 +3,7 @@ package com.learn.jasper.repository;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Test {
@@ -16,8 +17,12 @@ public class Test {
         List<Hello> inside = new ArrayList<>();
         Hello insideOne = new Hello();
         insideOne.setHello("insideOne");
+        Level2 level2 = new Level2();
+        level2.setLevel2("level2first");
+        insideOne.setLevel(new JRBeanCollectionDataSource(Arrays.asList(level2)));
         Hello insideTwo = new Hello();
         insideTwo.setHello("insidetwo");
+        insideTwo.setLevel(new JRBeanCollectionDataSource(Arrays.asList(level2)));
         inside.add(insideOne);
         inside.add(insideTwo);
         JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(inside);

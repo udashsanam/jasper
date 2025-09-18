@@ -62,7 +62,7 @@
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
 		</band>
 		<band height="200">
-			<element kind="subreport" uuid="1a4eff88-388c-4c73-81ba-0e77f7008686" x="140" y="0" width="771" height="200">
+			<element kind="subreport" uuid="1a4eff88-388c-4c73-81ba-0e77f7008686" x="80" y="0" width="630" height="200">
 				<dataSourceExpression><![CDATA[$F{subReport}]]></dataSourceExpression>
 				<expression><![CDATA[
             net.sf.jasperreports.engine.util.JRLoader.loadObject(
