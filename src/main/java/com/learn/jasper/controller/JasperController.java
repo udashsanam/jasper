@@ -33,11 +33,12 @@ public class JasperController {
 
         ReportTypeEnum report = ReportTypeEnum.valueOf(fileType);
         log.info("Eum :"+report);
-        // byte[] bytes = reportsService.employeeJasperReport24(fileType);
-        byte[] bytes = reportsService.employeeJasperReportInBytes(fileType);
+//         byte[] bytes = reportsService.employeeJasperReport24(fileType);
+//        byte[] bytes = reportsService.employeeJasperReportInBytes(fileType);
+        byte[] bytes = reportsService.robin(fileType);
         if (null != bytes) {
             ByteArrayResource resource = new ByteArrayResource(bytes);
-            String fileName = "Employee24_JasperReport" + "_" + LocalDateTime.now() +"pdf";
+            String fileName = "Employee24_JasperReport" + "_" + LocalDateTime.now() +".xlsx";
             return ResponseEntity.ok()
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
                     .contentLength(resource.contentLength())

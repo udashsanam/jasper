@@ -1,8 +1,6 @@
 package com.learn.jasper.service;
 
-import com.learn.jasper.repository.Employee;
-import com.learn.jasper.repository.EmployeeDto;
-import com.learn.jasper.repository.EmployeeRepository;
+import com.learn.jasper.repository.*;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.HtmlExporter;
@@ -10,17 +8,17 @@ import net.sf.jasperreports.engine.export.JRCsvExporter;
 import net.sf.jasperreports.engine.export.JRRtfExporter;
 import net.sf.jasperreports.engine.export.JRXmlExporter;
 import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
+import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.export.*;
 import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.nio.file.Path;
+import java.util.*;
 
 @Service
 public class ReportService {
@@ -33,6 +31,7 @@ public class ReportService {
 
     public byte[] employeeJasperReportInBytes(String fileType) throws Exception {
         String template = "reports/emp222.jrxml";
+        String tem2 = "reports/supreport.jrxml";
 //        List<Employee> employees = employeeRepository.findAll();
         List<EmployeeDto> dataSource = EmployeeDto.getEmployeeList();
 
@@ -49,7 +48,8 @@ public class ReportService {
 
         //2. Create SubReport Data & assign it to Parameters
         List<UserDto>  userDtos = UserDto.getDat();
-        JasperReport subReport = JasperCompileManager.compileReport(ResourceUtils.getFile("classpath:reports/supreport.jrxml").getAbsolutePath());
+        String x = (ResourceUtils.getFile("classpath:" + tem2).getAbsolutePath());
+        JasperReport subReport = JasperCompileManager.compileReport( x);
         JRBeanCollectionDataSource subDatasource = new JRBeanCollectionDataSource(userDtos);
         Map<String, Object> subParameters = new HashMap<>();
         subParameters.put("header", "User Accounts - Sub Report");
@@ -128,4 +128,34 @@ public class ReportService {
 
         }
     }
+
+    public byte[] robin(String fileType) throws Exception {
+        // ✅ Use compiled .jasper file instead of .jrxml
+        String template = "reports/robbin2.jasper";
+
+        // Prepare your data
+        List<Robin> dataSource = Robin.createDemoData();
+        JRBeanCollectionDataSource beanCollectionDataSource = new JRBeanCollectionDataSource(dataSource);
+
+        // 1. Create Required Parameters
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("runDate", new Date());
+        parameters.put("robinParam", beanCollectionDataSource);
+
+        Test x = new Test();
+        JRBeanCollectionDataSource test = new JRBeanCollectionDataSource(x.getTests());
+
+        // ✅ Load precompiled .jasper file from classpath
+        String path = ResourceUtils.getFile("classpath:" + template).getAbsolutePath();
+        JasperReport jasperReport = (JasperReport) JRLoader.loadObject(
+                getClass().getClassLoader().getResource(template)
+        );
+
+        // 4. Fill Report
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, test);
+
+        // 5. Export Report
+        return this.exportJasperReportBytes(jasperPrint, ReportTypeEnum.XLSX);
+    }
+
 }
